@@ -1,0 +1,14 @@
+<div class = "container">
+    <br>
+    <form [formGroup]="StockAdder" novalidate class = "form" >
+        <div>
+            <label>Enter The symbol of the stock to track</label>
+        </div>
+   
+    <br>
+    <input type="text" formControlName = "StockSymbol" class = "form-control" name = "StockSymbol">
+    <button [disabled] = "StockAdder.invalid" (click)="onTrackStockClick()">Track Stock</button>
+    </form>
+</div>
+
+<app-stock-detail-data   [events]="eventsSubject.asObservable()" [stockList]="stockList" ></app-stock-detail-data>
