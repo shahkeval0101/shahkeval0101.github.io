@@ -1,5 +1,6 @@
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { EventEmitter, Output } from '@angular/core';
 
 import { StockTrackerService } from '../../services/stock-tracker.service';
 
@@ -17,12 +18,15 @@ export class StockDetailDataComponent implements OnInit{
   initialData: string[];
   private eventsSubscription: Subscription
   stlist: any;
+  companyName: string;
   constructor(private _stockTrackerService : StockTrackerService, ) { }
   @Input() events: Observable<any>;
   @Input() stockList : any
-
+  @Output() notifyEvent = new EventEmitter<boolean>();
+  eventsSubject = new BehaviorSubject<any>("");
   ngOnInit()
    {
+
      this.stlist = this.stockList
     console.log("in child")
     this.eventsSubscription = this.events.subscribe((stockNameFromParent : any) => {
@@ -37,19 +41,29 @@ export class StockDetailDataComponent implements OnInit{
         }
         console.log("stock name", stockNameFromParent)
         this._stockTrackerService.getStockDetails(stockNameFromParent.name).subscribe((stockDetailsResponse : any)=>{
+          if(stockDetailsResponse.body.o>0 && stockDetailsResponse.body.h>0 && stockDetailsResponse.body.c>0){
           stocks.cp = stockDetailsResponse.body.c
           stocks.op = stockDetailsResponse.body.o
           stocks.pct = stockDetailsResponse.body.dp
           stocks.hp = stockDetailsResponse.body.h
-        })
-        this._stockTrackerService.getStockName(stockNameFromParent.name).subscribe((stockNameResponse : any)=>{
-          stocks.sym = stockNameResponse.body.result[0].symbol
-          stocks.desc = stockNameResponse.body.result[0].description
+
+
+          this._stockTrackerService.getStockName(stockNameFromParent.name).subscribe((stockNameResponse : any)=>{
+            stocks.sym = stockNameResponse.body.result[0].symbol
+            stocks.desc = stockNameResponse.body.result[0].description
+            console.log("company name",this.companyName)
+            this.eventsSubject.next(this.stockName);
+            this.stlist = this._stockTrackerService.storeData(stocks)
+            console.log("stock list",this.stlist )     
+            this.notifyEvent.emit(false)     
+          })
+          }
+          else{
+            this.notifyEvent.emit(true)
+          }
           
-          // this.stockList.push(stocks)
-          this.stlist = this._stockTrackerService.storeData(stocks)
-          console.log("stock list",this.stlist)          
         })
+        
       }
      
   });  

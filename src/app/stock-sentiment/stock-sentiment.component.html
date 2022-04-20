@@ -1,66 +1,29 @@
-<!-- <p>stock-sentiment works!</p> -->
-<!-- <ng-container >
-    <div class="row" >
-        <div class="col-sm-4" *ngFor="let item of sentimentList">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">{{item.sym}}</h5>
-              <p class="card-text">{{item.monthName}}</p>
-              <p class="card-text">Change :{{item.change}}</p>
-              <p class="card-text">MSPR : {{item.mspr }}</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
+  <ng-container *ngIf="sentimentList.length>0;else nothingToDisplay">
+    <div class="container">
+      <br>
+      <mat-card class="example-card" id="closeablecard">
+          <mat-card-content>
+            <h3 class="card-title"><strong style = "color: black;">{{companyName}}({{symbol}})</strong></h3>
+            <div class="row">
+              <ng-container  *ngFor="let item of sentimentList">
+                <div class="col-sm-4">
+                  <p>{{item.monthName | uppercase}} </p>
+                        <p class="card-text col-sm-6"   >Change :{{item.change}}</p>
+                        <p class="card-text col-sm-6" >MSPR : {{item.mspr }}</p>
+                </div>
+                </ng-container>            
             </div>
-          </div>
-        </div>
-      </div>
-
-</ng-container> -->
-
-  <div class="card" *ngIf="sentimentList.length>0; else nothingToDisplay;">
-      <!-- <h5 class="card-header">{{st.desc}}({{st.sym}})  </h5> -->
-      <div class="card-body">
-          <div class="row">
-          
-            <ng-container  *ngFor="let item of sentimentList">
-              <div class="col-sm-3">
-                <h3 class="card-title">{{item.sym}}</h3>
-                <h5 class = "card-title">{{item.monthName | uppercase}} </h5>
-
-                  <div class="row">
-                      <p class="card-text col-sm-6" >Change :{{item.change}}</p>
-                      <!-- <p class="card-text col-sm-6" >Opening Price: {{st.op | currency}} </p> -->
-                    </div>
-
-                    <div class="row">
-                      <p class="card-text col-sm-6" >MSPR : {{item.mspr }}</p>
-                      <!-- <p class="card-text col-sm-6" >High Price: {{st.hp | currency}} </p> -->
-                    </div>
-                    
-              </div>
-              <div class = "col-sm-1">
-                <span *ngIf="item.change>0; else RedMarker;" style="color: green; font-size:80px;" class = "marginleft" [innerHTML]="greenIcon"></span>
-                        <ng-template  #RedMarker>
-                            <span style="color: red; font-size:80px" [innerHTML]="redIcon"></span>
-                        </ng-template>
-              </div>
-              </ng-container>            
-          </div>
-      <br><br>
-      <div class="row">
-        <div class = "col-sm-6">
-          <a [routerLink]="['']" class="btn btn-primary"> < Back to list of stocks </a>
-
-        </div>
-      </div>
-      </div>
-      </div>
-      <ng-template #nothingToDisplay>
-        <div>
-          Nothing to Display No Values for past three months
-          <div class = "col-sm-6">
-            <a [routerLink]="['']" class="btn btn-primary"> < Back to list of stocks </a>
-  
-          </div>
-          
-        </div>
-      </ng-template>
+          </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button [routerLink]="['']" color="primary">
+              Back to list of stocks
+            </button>      
+        </mat-card-actions>
+      </mat-card>
+  </div>
+</ng-container>
+  <ng-template #nothingToDisplay>
+    <div>
+      Nothing to Display No Values for past three months
+    </div>
+  </ng-template>

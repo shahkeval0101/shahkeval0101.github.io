@@ -17,7 +17,8 @@ export class StockTrackerComponent implements OnInit {
   };
   eventsSubject = new BehaviorSubject<any>("");
   public stockList: any = [];
-
+  formValidation : boolean = false
+  loading: boolean;
    
   constructor(private _stockTrackerService : StockTrackerService,private changeDetector: ChangeDetectorRef) { }
 
@@ -36,10 +37,21 @@ export class StockTrackerComponent implements OnInit {
     })
   }
   onTrackStockClick(){
+    this.loading = true;
     console.log("input value", this.StockAdder.get("StockSymbol")?.value)
     this.changeDetector.detectChanges();
     this.stockName.name =  this.StockAdder.get("StockSymbol")?.value
     this.eventsSubject.next(this.stockName);
     this.stockdetaildataflag= true
     
-}}
+}
+addItem(value : boolean){
+  this.formValidation = value
+  this.changeDetector.detectChanges();
+  console.log(this.formValidation)
+  this.loading = false;
+
+
+
+}
+}

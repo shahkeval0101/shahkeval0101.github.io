@@ -1,0 +1,6 @@
+.example-spacer {
+    flex: 0.9 0.9 auto;
+  }
+a:hover{
+    color: black;
+}

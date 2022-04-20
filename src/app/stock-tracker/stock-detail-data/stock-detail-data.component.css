@@ -1,3 +1,20 @@
 .close-icon {
     cursor: pointer;
   }
+  /* .child {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; */
+    /* max-width: 1200px;
+    color: #fff; */
+  /* } */
+  .example-card {
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    flex-direction: column;
+    max-width: 600px;
+    color: black;
+    /* background-color: black; */
+  }
