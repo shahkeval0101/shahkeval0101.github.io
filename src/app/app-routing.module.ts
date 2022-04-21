@@ -1,10 +1,10 @@
 import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AboutProjectComponent } from './about-project/about-project.component';
+import { AboutProjectComponent } from './components/about-project/about-project.component';
 import { AppComponent } from './app.component';
-import { StockSentimentComponent } from './stock-sentiment/stock-sentiment.component';
-import { StockTrackerComponent } from './stock-tracker/stock-tracker.component';
+import { StockSentimentComponent } from './components/stock-sentiment/stock-sentiment.component';
+import { StockTrackerComponent } from './components/stock-tracker/stock-tracker.component';
 
 const routes: Routes = [
   {path : '',component: StockTrackerComponent},

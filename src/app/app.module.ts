@@ -1,7 +1,7 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButton, MatButtonModule } from '@angular/material/button';
 
-import { AboutProjectComponent } from './about-project/about-project.component';
+import { AboutProjectComponent } from './components/about-project/about-project.component';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -18,9 +18,9 @@ import { MatSliderModule } from '@angular/material/slider';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { StockDetailDataComponent } from './stock-tracker/stock-detail-data/stock-detail-data.component';
-import { StockSentimentComponent } from './stock-sentiment/stock-sentiment.component';
-import { StockTrackerComponent } from './stock-tracker/stock-tracker.component';
+import { StockDetailDataComponent } from './components/stock-tracker/stock-detail-data/stock-detail-data.component';
+import { StockSentimentComponent } from './components/stock-sentiment/stock-sentiment.component';
+import { StockTrackerComponent } from './components/stock-tracker/stock-tracker.component';
 import { StockTrackerService } from './services/stock-tracker.service';
 
 @NgModule({

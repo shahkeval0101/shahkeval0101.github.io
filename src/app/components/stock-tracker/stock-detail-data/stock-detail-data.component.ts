@@ -2,7 +2,7 @@ import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { EventEmitter, Output } from '@angular/core';
 
-import { StockTrackerService } from '../../services/stock-tracker.service';
+import { StockTrackerService } from '../../../services/stock-tracker.service';
 
 @Component({
   selector: 'app-stock-detail-data',

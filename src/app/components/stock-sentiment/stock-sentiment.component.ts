@@ -3,7 +3,7 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 
 import { StockTrackerComponent } from '../stock-tracker/stock-tracker.component';
-import { StockTrackerService } from '../services/stock-tracker.service';
+import { StockTrackerService } from '../../services/stock-tracker.service';
 import { formatDate } from '@angular/common';
 import { start } from 'repl';
 

@@ -2,7 +2,7 @@ import { BehaviorSubject, Subject } from 'rxjs';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { StockTrackerService } from '../services/stock-tracker.service';
+import { StockTrackerService } from '../../services/stock-tracker.service';
 
 @Component({
   selector: 'app-stock-tracker',
@@ -18,7 +18,7 @@ export class StockTrackerComponent implements OnInit {
   eventsSubject = new BehaviorSubject<any>("");
   public stockList: any = [];
   formValidation : boolean = false
-  loading: boolean;
+  loading: boolean = false;
    
   constructor(private _stockTrackerService : StockTrackerService,private changeDetector: ChangeDetectorRef) { }
 
