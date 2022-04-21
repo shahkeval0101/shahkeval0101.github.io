@@ -1,33 +1,32 @@
-<div class="container child" *ngFor="let st of stlist">
-  <br>
-  <mat-card class="example-card"id="closeablecard">
-        <div  class="border-bottom-0">
-            <button mat-button data-dismiss="alert" data-target="#closeablecard" type="button" class="close" aria-label="Close" (click)="onClose($event,st.sym)" >
-              <mat-icon>delete</mat-icon>
-            </button>
-          </div>
-        <br>
-      <mat-card-subtitle><strong style = "color: black;"> {{st.desc}}({{st.sym}}) </strong></mat-card-subtitle>
-      <mat-card-content>
-        <div class="row">
-          <div class="col-sm-9">
-              <div class="row">
-                  <p class="card-text col-sm-6" >Change Today: {{st.pct}}% </p>
-                  <p class="card-text col-sm-6" >Opening Price: {{st.op | currency}} </p>
-                </div>
-
-                <div class="row">
-                  <p class="card-text col-sm-6" >Currenct Price: {{st.cp | currency}}</p>
-                  <p class="card-text col-sm-6" >High Price: {{st.hp | currency}} </p>
-                </div>
-          </div>
-        </div>
-      </mat-card-content>
-    <mat-card-actions>
-        <button mat-raised-button [routerLink]="['/sentiment',st.sym]" [state]="{id:this.stlist}" color="primary">
-            Go To Social Sentiment details
+<div class="child">
+  <mat-card  id="closeablecard" *ngFor="let st of stlist" style="border: 1px solid black; margin-top: 20px; width: 600px;">
+    <div  class="border-bottom-0 pull-right">
+        <button mat-button data-dismiss="alert" data-target="#closeablecard" type="button" class="close" aria-label="Close" (click)="onClose($event,st.sym)" >
+          <mat-icon>delete</mat-icon>
         </button>
-    </mat-card-actions>
-  </mat-card>
-   
-  
+      </div>
+    <br>
+  <mat-card-subtitle><strong style = "color: black;"> {{st.desc}}({{st.sym}}) </strong></mat-card-subtitle>
+  <mat-card-content>
+    <div class="row">
+      <div class="col-sm-9">
+          <div class="row">
+              <p class="card-text col-sm-6" >Change Today: {{st.pct}}% </p>
+              <p class="card-text col-sm-6" >Opening Price: {{st.op | currency}} </p>
+            </div>
+
+            <div class="row">
+              <p class="card-text col-sm-6" >Currenct Price: {{st.cp | currency}}</p>
+              <p class="card-text col-sm-6" >High Price: {{st.hp | currency}} </p>
+            </div>
+      </div>
+    </div>
+  </mat-card-content>
+<mat-card-actions>
+    <button mat-raised-button [routerLink]="['/sentiment',st.sym]" [state]="{id:this.stlist}" color="primary">
+        Go To Social Sentiment details
+    </button>
+</mat-card-actions>
+</mat-card>
+
+</div>

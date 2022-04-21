@@ -61,9 +61,7 @@ public stocks: Array<string> = ['GOOG', 'FB', 'AMZN', 'TWTR'];
 
   
   
-  getStockDetails(stockName : string){
-    
-   
+getStockDetails(stockName : string){
     let url = "https://finnhub.io/api/v1/quote";
     const params = new HttpParams()
       .set('symbol', stockName)
@@ -100,6 +98,9 @@ sentimentData(stockName:any,startDate:any, endDate:any){
 
 loadData(){
   return of(stockList.slice())
+}
+getData(){
+  return stockList.slice()
 }
 removeData(sym:string){
   console.log("index",stockList.findIndex((o:any) => o.sym === sym))

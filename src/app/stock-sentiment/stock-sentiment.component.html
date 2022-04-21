@@ -13,6 +13,7 @@
                 </div>
                 </ng-container>            
             </div>
+            <mat-card-subtitle>Past {{sentimentList.length}} months records available</mat-card-subtitle>
           </mat-card-content>
         <mat-card-actions>
             <button mat-raised-button [routerLink]="['']" color="primary">
@@ -24,6 +25,9 @@
 </ng-container>
   <ng-template #nothingToDisplay>
     <div>
-      Nothing to Display No Values for past three months
+      Nothing to Display No Values for past three months <br>
+      <button mat-raised-button [routerLink]="['']" color="primary">
+        Back to list of stocks
+      </button>
     </div>
   </ng-template>

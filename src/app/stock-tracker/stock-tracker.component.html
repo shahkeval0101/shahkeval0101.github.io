@@ -7,7 +7,9 @@
             <input matInput placeholder="Enter Value" type="text" formControlName = "StockSymbol" class = "form-control" name = "StockSymbol">
             <mat-icon matSuffix>query_stats</mat-icon>
             <mat-hint>symbol,stock-name</mat-hint>
-            <mat-error *ngIf="StockAdder.invalid || formValidation">Please Enter a Valid Value</mat-error>
+            <mat-error *ngIf="StockAdder.controls.StockSymbol.errors?.required">Symbol is Required</mat-error>
+            <mat-error *ngIf="StockAdder.controls.StockSymbol.errors?.invalidValue">Value exists in the list</mat-error>
+            <mat-error *ngIf="StockAdder.controls.StockSymbol.errors?.RequiredValue">Please Enter Valid Symbol</mat-error>
           </mat-form-field>
             <button mat-raised-button color="primary" [style.margin-left.px]="10"  [disabled] = "StockAdder.invalid" (click)="onTrackStockClick()">
                 Track Stock 

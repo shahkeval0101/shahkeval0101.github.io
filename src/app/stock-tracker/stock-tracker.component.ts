@@ -28,6 +28,7 @@ export class StockTrackerComponent implements OnInit {
       this.stockList = data
     })
     this.initiateForm()
+    this.listenToValueChange()
   }
   initiateForm(){
     this.StockAdder = new FormGroup({
@@ -38,20 +39,35 @@ export class StockTrackerComponent implements OnInit {
   }
   onTrackStockClick(){
     this.loading = true;
-    console.log("input value", this.StockAdder.get("StockSymbol")?.value)
+    console.log("input value", this.StockAdder.get("StockSymbol")?.value.toUpperCase())
     this.changeDetector.detectChanges();
-    this.stockName.name =  this.StockAdder.get("StockSymbol")?.value
+    this.stockName.name =  this.StockAdder.get("StockSymbol")?.value.toUpperCase()
     this.eventsSubject.next(this.stockName);
     this.stockdetaildataflag= true
-    
-}
+  }
 addItem(value : boolean){
   this.formValidation = value
   this.changeDetector.detectChanges();
   console.log(this.formValidation)
+  if(this.formValidation){
+    this.StockAdder.controls.StockSymbol.setErrors({RequiredValue:this.formValidation})
+  }
+
   this.loading = false;
 
+}
 
-
+listenToValueChange(){
+  
+  this.StockAdder.controls.StockSymbol.valueChanges.subscribe(value=>{
+    let currentStockList = this._stockTrackerService.getData()
+    console.log("val",currentStockList.findIndex((o:any)=> o.sym == value ))
+    if(value == ""){
+      this.StockAdder.controls.StockSymbol.setErrors({RequiredValue:true})
+    }
+    if(currentStockList.findIndex((o:any)=> o.sym == value ) != -1){
+      this.StockAdder.controls.StockSymbol.setErrors({invalidValue:true})
+    }
+  })
 }
 }
