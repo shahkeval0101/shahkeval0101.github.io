@@ -24,8 +24,8 @@ export class StockTrackerComponent implements OnInit {
 
   ngOnInit(): void {
     this._stockTrackerService.loadData().subscribe((data : any)=>{
-      console.log("load data",data)
-      this.stockList = data
+      console.log("load data",JSON.parse(data))
+      this.stockList = JSON.parse(data)
     })
     this.initiateForm()
     this.listenToValueChange()

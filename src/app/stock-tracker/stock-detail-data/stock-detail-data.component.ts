@@ -28,7 +28,7 @@ export class StockDetailDataComponent implements OnInit{
    {
 
      this.stlist = this.stockList
-    console.log("in child")
+    console.log("in child",this.stlist)
     this.eventsSubscription = this.events.subscribe((stockNameFromParent : any) => {
       if(stockNameFromParent){
         let stocks = {
@@ -53,8 +53,8 @@ export class StockDetailDataComponent implements OnInit{
             stocks.desc = stockNameResponse.body.result[0].description
             console.log("company name",this.companyName)
             this.eventsSubject.next(this.stockName);
-            this.stlist = this._stockTrackerService.storeData(stocks)
-            console.log("stock list",this.stlist )     
+            this.stlist = JSON.parse(this._stockTrackerService.storeData(stocks))
+            console.log("stock list after data added",this.stlist )     
             this.notifyEvent.emit(false)     
           })
           }

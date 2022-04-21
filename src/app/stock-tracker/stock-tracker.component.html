@@ -6,7 +6,7 @@
             <mat-label>Enter The symbol of the stock to track</mat-label>
             <input matInput placeholder="Enter Value" type="text" formControlName = "StockSymbol" class = "form-control" name = "StockSymbol">
             <mat-icon matSuffix>query_stats</mat-icon>
-            <mat-hint>symbol,stock-name</mat-hint>
+            <mat-hint>Symbol(AAPL,NFLX,AMZN)</mat-hint>
             <mat-error *ngIf="StockAdder.controls.StockSymbol.errors?.required">Symbol is Required</mat-error>
             <mat-error *ngIf="StockAdder.controls.StockSymbol.errors?.invalidValue">Value exists in the list</mat-error>
             <mat-error *ngIf="StockAdder.controls.StockSymbol.errors?.RequiredValue">Please Enter Valid Symbol</mat-error>

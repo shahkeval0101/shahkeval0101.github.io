@@ -7,48 +7,7 @@ export interface MyStock{
   stockName : string
 }
 
-let  stockList : {}[] = [
-  {
-      "sym": "AAPL",
-      "desc": "APPLE INC",
-      "cp": 165.76,
-      "op": 165.02,
-      "pct": 0.418,
-      "hp": 165.95
-  },
-  {
-      "sym": "MSFT",
-      "desc": "MICROSOFT CORP",
-      "cp": 283.42,
-      "op": 279.38,
-      "pct": 1.0338,
-      "hp": 283.4542
-  },
-  {
-      "sym": "GOOG",
-      "desc": "ALPHABET INC-CL C",
-      "cp": 2587,
-      "op": 2561.54,
-      "pct": 1.0855,
-      "hp": 2593.925
-  },
-  {
-      "sym": "AMZN",
-      "desc": "AMAZON.COM INC",
-      "cp": 3084.21,
-      "op": 3040.59,
-      "pct": 0.933,
-      "hp": 3088.76
-  },
-  {
-      "sym": "FB",
-      "desc": "META PLATFORMS INC-CLASS A",
-      "cp": 212.6505,
-      "op": 210.52,
-      "pct": 0.8922,
-      "hp": 212.93
-  }
-]
+let  stockList : {}[] = []
 @Injectable({
   providedIn: 'root'
 })
@@ -79,9 +38,12 @@ getStockName(stockName:string){
       return this._http.get(url, { params, headers, observe: 'response' })
 
 }
-storeData(data : any){
+storeData(data : any):string{
   stockList.push(data)
-  return stockList.slice()
+  localStorage.setItem("datas", JSON.stringify(stockList.slice()))
+  // return stockList.slice()
+  console.log("local storage in service after added",localStorage.getItem("datas"))
+  return localStorage.getItem("datas")|| '[]'
   // this.bsubject.next(this.stockStoredData)
 }
 sentimentData(stockName:any,startDate:any, endDate:any){
@@ -97,15 +59,21 @@ sentimentData(stockName:any,startDate:any, endDate:any){
 }
 
 loadData(){
-  return of(stockList.slice())
+  // console.log("in before stringify",stockList.slice())
+  // localStorage.setItem("datas", JSON.stringify(stockList.slice()));
+  stockList = JSON.parse(localStorage.getItem("datas") || "[]")
+  console.log("local storage value load data",localStorage.getItem("datas"))
+  return of(localStorage.getItem("datas"))
 }
 getData(){
-  return stockList.slice()
+  return JSON.parse(localStorage.getItem("datas")|| '[]')
 }
 removeData(sym:string){
+  stockList = JSON.parse(localStorage.getItem("datas")|| '[]')
   console.log("index",stockList.findIndex((o:any) => o.sym === sym))
   stockList.splice(stockList.findIndex((o:any) => o.sym === sym),1);
+  localStorage.setItem("datas",JSON.stringify(stockList))
   console.log("stocklist in service sym", stockList,sym)
-  return stockList.slice()
+  return JSON.parse(localStorage.getItem("datas")|| '[]')
 }
 }
