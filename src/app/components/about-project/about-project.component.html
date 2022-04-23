@@ -1,7 +1,26 @@
-<strong>Angular Training Certification Program</strong>
-<h3>This Project is Developed as part of the Certification Program of Angular Training Certification Challenge </h3>
-<p>The Project uses Angular, BootStrap and Angular Material extensively<br>
-The Project uses an OpenSource Finnhub API to get the details of the Stocks, their Name and Past Records</p> 
+<h3><strong> Stock Tracker App </strong></h3>
+<p style="font-family: 'Roboto', sans-serif;color: black;font-size: 9pt;">This project is developed as a part of the angular certification coding challenge from 
+  <a href="https://www.angulartraining.com/">Angular Training</a> <br>
+This is level 2 challenge to develop the coding application.
+This is a stock tracking application which uses open source api finnhub <a href="https://finnhub.io">Finnhub</a> to get  real time stock data of American stock exchange. <br>
+
+The application initially fetches data from local storage which is saved from the last time user has used this application. <br>
+The application allows the user to add the stock to the list to keep its track, it also performs some basic validation on the input field. <br>
+The application uses different API end points to get different details about the stocks. <br>
+User once enters the symbol of the stock he wants to track and clicks on "Track Stock" button, the application calls 2 API  <br>
+	1) Finnhub API to fetch stock details like opening price, high price, percentage change, current price, low price <a href="https://finnhub.io/docs/api/quote">from here</a> <br>
+	2) Finnhub API to fetch company stock details <a href="https://finnhub.io/docs/api/symbol-search"></a> 
+<br>
+With the following information new stock is added to the tracking list. <br>
+The application also provides ability to add stock and remove the stock from the list whenever needed with the close button present on each tracker. <br>
+The stock tracker has an additional feature to give sentiments of the stock for the past few months for which it uses open source. Finnhub API to get the sentiments of the stock for previous month <a href="https://finnhub.io/docs/api/insider-sentiment">from here</a>.
+By default it calls for the past three months, but depending upon the API response the number months shown can be less <br>. 
+
+
+The application is built with Finnhub Open source API, Angular and Angular Material library and Bootstrap. <br>
+The application is hosted on github pages with  <a href="https://shahkeval0101.github.io/.">url</a>  <br>
+The source code is present at <a href="https://github.com/shahkeval0101/shahkeval0101.github.io">here</a> . <br>
+</p>
 <button mat-raised-button [routerLink]="['']" color="primary">
-    Back to list of stocks
-  </button> 
+  Back to list of stocks
+</button>    

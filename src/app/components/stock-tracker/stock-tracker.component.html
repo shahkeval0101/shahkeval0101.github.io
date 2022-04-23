@@ -1,17 +1,17 @@
 <div class = "container" class = "parent">
     <br>
-    <form [formGroup]="StockAdder" novalidate class = "form" >
+    <form [formGroup]="stockAdder" novalidate class = "form" #myform="ngForm" >
         <br>
         <mat-form-field appearance="outline" [style.width.px]=400 style="text-align:left;">
-            <mat-label>Enter The symbol of the stock to track</mat-label>
-            <input matInput placeholder="Enter Value" type="text" formControlName = "StockSymbol" class = "form-control" name = "StockSymbol">
+            <mat-label>Enter the symbol of a stock to track</mat-label>
+            <input matInput placeholder="Enter Value" type="text" formControlName = "stockSymbol" class = "form-control" name = "stockSymbol">
             <mat-icon matSuffix>query_stats</mat-icon>
-            <mat-hint>Symbol(AAPL,NFLX,AMZN)</mat-hint>
-            <mat-error *ngIf="StockAdder.controls.StockSymbol.errors?.required">Symbol is Required</mat-error>
-            <mat-error *ngIf="StockAdder.controls.StockSymbol.errors?.invalidValue">Value exists in the list</mat-error>
-            <mat-error *ngIf="StockAdder.controls.StockSymbol.errors?.RequiredValue">Please Enter Valid Symbol</mat-error>
+            <mat-hint>Symbol(AAPL,TSLA,GOOG)</mat-hint>
+            <mat-error *ngIf="stockAdder.controls.stockSymbol.errors?.required">Symbol is Required</mat-error>
+            <mat-error *ngIf="stockAdder.controls.stockSymbol.errors?.invalidValue">Value exists in the list</mat-error>
+            <mat-error *ngIf="stockAdder.controls.stockSymbol.errors?.RequiredValue">Please Enter Valid Symbol</mat-error>
           </mat-form-field>
-            <button mat-raised-button color="primary" [style.margin-left.px]="10"  [disabled] = "StockAdder.invalid" (click)="onTrackStockClick()">
+            <button mat-raised-button color="primary" [style.margin-left.px]="10"  [disabled] = "stockAdder.invalid" (click)="onTrackStockClick()">
                 Track Stock 
                 <!-- <mat-icon matSuffix>search</mat-icon>  -->
             </button>

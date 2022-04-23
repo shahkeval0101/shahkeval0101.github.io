@@ -1,5 +1,5 @@
 import { BehaviorSubject, of } from 'rxjs';
-import { HttpClient, HttpClientModule, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 import { Injectable } from '@angular/core';
 
@@ -19,7 +19,12 @@ public stocks: Array<string> = ['GOOG', 'FB', 'AMZN', 'TWTR'];
   constructor(private _http : HttpClient) { }
 
   
-  
+   /*
+    @name getStockDetails
+    @description API call to get details of the stock symbol entered
+    @param stockName : stockname
+    @return Response of the API data
+    */ 
 getStockDetails(stockName : string){
     let url = "https://finnhub.io/api/v1/quote";
     const params = new HttpParams()
@@ -29,6 +34,12 @@ getStockDetails(stockName : string){
       // return of()
     return this._http.get(url, { params, headers, observe: 'response' })
 }
+ /*
+    @name getStockName
+    @description API call to get company details of the stock symbol entered
+    @param stockName : stockname
+    @return Response of the API data
+    */
 getStockName(stockName:string){
   let url = "https://finnhub.io/api/v1/search"
   const params = new HttpParams()
@@ -38,14 +49,25 @@ getStockName(stockName:string){
       return this._http.get(url, { params, headers, observe: 'response' })
 
 }
+ /*
+    @name storeData
+    @description To store data entered 
+    @param data : object to store in the local storage
+    @return Json of the values stored in local storage
+    */
 storeData(data : any):string{
   stockList.push(data)
   localStorage.setItem("datas", JSON.stringify(stockList.slice()))
-  // return stockList.slice()
-  console.log("local storage in service after added",localStorage.getItem("datas"))
   return localStorage.getItem("datas")|| '[]'
-  // this.bsubject.next(this.stockStoredData)
 }
+  /*
+    @name sentimentData
+    @description API call to get company sentiments of the stock symbol entered of past months
+    @param stockName : stockname
+    @param startDate : from value
+    @param endDate : to value
+    @return Response of the API data
+    */
 sentimentData(stockName:any,startDate:any, endDate:any){
   let url = "https://finnhub.io/api/v1/stock/insider-sentiment"
   const params = new HttpParams()
@@ -54,26 +76,36 @@ sentimentData(stockName:any,startDate:any, endDate:any){
   .set("to",endDate)
   .set("token","bu4f8kn48v6uehqi3cqg")
   let headers = new HttpHeaders();
-  console.log("params  symbol ",params,stockName)
   return this._http.get(url, { params, headers, observe: 'response' })
 }
-
+  /*
+    @name loadData
+    @description to load data
+    @return observable of type Json to load initial data from local storage
+    */
 loadData(){
-  // console.log("in before stringify",stockList.slice())
-  // localStorage.setItem("datas", JSON.stringify(stockList.slice()));
   stockList = JSON.parse(localStorage.getItem("datas") || "[]")
-  console.log("local storage value load data",localStorage.getItem("datas"))
   return of(localStorage.getItem("datas"))
 }
+ /*
+    @name getData
+    @description API call to get company details of the stock symbol entered
+    @param stockName : stockname
+    @return Json of the values stored in local storage
+    */
 getData(){
   return JSON.parse(localStorage.getItem("datas")|| '[]')
 }
+ /*
+    @name removeData
+    @description To remove data from the array
+    @param sym : stock symbol to be removed
+    @return Json of the values stored in local storage
+    */
 removeData(sym:string){
   stockList = JSON.parse(localStorage.getItem("datas")|| '[]')
-  console.log("index",stockList.findIndex((o:any) => o.sym === sym))
   stockList.splice(stockList.findIndex((o:any) => o.sym === sym),1);
   localStorage.setItem("datas",JSON.stringify(stockList))
-  console.log("stocklist in service sym", stockList,sym)
   return JSON.parse(localStorage.getItem("datas")|| '[]')
 }
 }
