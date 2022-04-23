@@ -4,9 +4,22 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 export interface MyStock{
-  stockName : string
+  name : string
 }
-
+export interface MyData{
+  cp: string
+  desc: string
+  hp: string
+  op: string
+  pct: string
+  sym: string
+}
+export interface SentimentData{
+  sym: string;
+  mspr: string;
+  monthName: string;
+  change: string;
+}
 let  stockList : {}[] = []
 @Injectable({
   providedIn: 'root'
@@ -58,7 +71,7 @@ getStockName(stockName:string){
 storeData(data : any):string{
   stockList.push(data)
   localStorage.setItem("datas", JSON.stringify(stockList.slice()))
-  return localStorage.getItem("datas")|| '[]'
+  return JSON.parse(localStorage.getItem("datas")|| '[]')
 }
   /*
     @name sentimentData
@@ -94,7 +107,7 @@ loadData(){
     @return Json of the values stored in local storage
     */
 getData(){
-  return JSON.parse(localStorage.getItem("datas")|| '[]')
+  return JSON.parse(localStorage.getItem("datas")|| "[]")
 }
  /*
     @name removeData

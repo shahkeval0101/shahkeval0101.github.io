@@ -1,12 +1,11 @@
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import {
   Component,
   Input,
   OnInit,
 } from '@angular/core';
 import { EventEmitter, Output } from '@angular/core';
-
-import { StockTrackerService } from '../../../services/stock-tracker.service';
+import { MyData, MyStock, StockTrackerService } from '../../../services/stock-tracker.service';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-stock-detail-data',
@@ -14,19 +13,14 @@ import { StockTrackerService } from '../../../services/stock-tracker.service';
   styleUrls: ['./stock-detail-data.component.css'],
 })
 export class StockDetailDataComponent implements OnInit {
-  public greenIcon: string = '&#129145;';
-  public redIcon: string = '&#129147;';
-  @Input() stockName: any;
-
-  initialData: string[];
+  @Input() stockName: MyStock;
   private eventsSubscription: Subscription;
-  stlist:any;
+  stlist:any = [];
   companyName: string;
   constructor(private _stockTrackerService: StockTrackerService) {}
-  @Input() events: Observable<any>;
-  @Input() stockList: any;
+  @Input() events: Observable<MyStock>;
+  @Input() stockList: MyData[];
   @Output() notifyEvent = new EventEmitter<boolean>();
-  eventsSubject = new BehaviorSubject<any>('');
   ngOnInit() {
     this.stlist = this.stockList;
     console.log('In Child Component');
@@ -70,9 +64,7 @@ export class StockDetailDataComponent implements OnInit {
                     //API call to get Company name
                     stocks.sym = stockNameResponse.body.result[0].symbol;
                     stocks.desc = stockNameResponse.body.result[0].description;
-                    this.eventsSubject.next(this.stockName);
-                    this.stlist  = JSON.parse(
-                      this._stockTrackerService.storeData(stocks));
+                    this.stlist  = this._stockTrackerService.storeData(stocks);
                     console.log('Stock List after Data added', this.stlist);
                     this.notifyEvent.emit(false);
                   });

@@ -1,7 +1,7 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { SentimentData, StockTrackerService } from '../../services/stock-tracker.service';
 
-import { StockTrackerService } from '../../services/stock-tracker.service';
 import { formatDate } from '@angular/common';
 
 @Component({
@@ -10,10 +10,7 @@ import { formatDate } from '@angular/common';
   styleUrls: ['./stock-sentiment.component.css'],
 })
 export class StockSentimentComponent implements OnInit {
-  stockName: any;
-  sentimentList: any = [];
-  public greenIcon: string = '&#129145;';
-  public redIcon: string = '&#129147;';
+  sentimentList: SentimentData[] = [];
   companyName: string;
   symbol: string;
 
@@ -31,13 +28,11 @@ export class StockSentimentComponent implements OnInit {
     @return void
     */
   initiateApi() {
-    this.stockName = this.route.snapshot.params.symbol; //get value from url
+    this.symbol = this.route.snapshot.params.symbol; //get value from url
     let index = history.state.id.findIndex(
-      (o: any) => o.sym === this.stockName
+      (o: any) => o.sym === this.symbol
     ); // get value of the data passed
     this.companyName = history.state.id[index].desc;
-    this.symbol = history.state.id[index].sym;
-
     let startDate = new Date();
     startDate.setMonth(startDate.getMonth() - 1);
     let endDate = new Date(startDate);
@@ -61,7 +56,7 @@ export class StockSentimentComponent implements OnInit {
     };
 
     this._stockTrackerService
-      .sentimentData(this.stockName, edDate, stDate)
+      .sentimentData(this.symbol, edDate, stDate)
       .subscribe((data: any) => {
         if (data) {
           for (let i = 0; i < data.body.data.length; i++) {

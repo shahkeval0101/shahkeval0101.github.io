@@ -1,8 +1,8 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MyData, MyStock, StockTrackerService } from '../../services/stock-tracker.service';
 
 import { BehaviorSubject } from 'rxjs';
-import { StockTrackerService } from '../../services/stock-tracker.service';
 
 @Component({
   selector: 'app-stock-tracker',
@@ -11,15 +11,13 @@ import { StockTrackerService } from '../../services/stock-tracker.service';
 })
 export class StockTrackerComponent implements OnInit {
   public stockAdder: FormGroup;
-  stockdetaildataflag: boolean;
-  public stockName: any = {
+  public stockName: MyStock = {
     name: '',
   };
-  eventsSubject = new BehaviorSubject<any>('');
-  public stockList: any = [];
+  eventsSubject = new BehaviorSubject<MyStock>({name : ""});
+  public stockList: MyData[] = [];
   formValidation: boolean = false;
   loading: boolean = false;
-
   constructor(
     private _stockTrackerService: StockTrackerService,
     private changeDetector: ChangeDetectorRef
@@ -77,7 +75,6 @@ export class StockTrackerComponent implements OnInit {
       .get('stockSymbol')
       ?.value.toUpperCase();
     this.eventsSubject.next(this.stockName);
-    this.stockdetaildataflag = true;
   }
 
   /*
@@ -95,6 +92,7 @@ export class StockTrackerComponent implements OnInit {
       });
     }else{
       this.stockAdder.reset()
+      this.stockAdder.controls.stockSymbol.setErrors(null);
     }
 
     this.loading = false;
@@ -106,17 +104,15 @@ export class StockTrackerComponent implements OnInit {
     */
   listenToValueChange() {
     this.stockAdder.controls.stockSymbol.valueChanges.subscribe((value) => {
-    
+      value = value?value:false
       let currentStockList = this._stockTrackerService.getData();
-      console.log("value changes, current stock list",value,currentStockList)
       if (value == '') {
         this.stockAdder.controls.stockSymbol.setErrors({ RequiredValue: true });
       }
       if (value && value.length>5 ) {
-        this.stockAdder.controls.stockSymbol.setErrors({ RequiredValue: true });
+        this.stockAdder.controls.stockSymbol.setErrors({ LengthValue: true });
       }
-      
-      if (value && currentStockList.findIndex((o: any) => o.sym == value.toUpperCase()) != -1) {
+      if (value && currentStockList.findIndex((o:any) => o.sym == value?.toUpperCase()) != -1) {
         this.stockAdder.controls.stockSymbol.setErrors({ invalidValue: true });
       }
       
