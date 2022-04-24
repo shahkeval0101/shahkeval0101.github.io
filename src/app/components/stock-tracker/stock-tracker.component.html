@@ -13,7 +13,6 @@
           </mat-form-field>
             <button mat-raised-button color="primary" [style.margin-left.px]="10"  [disabled] = "stockAdder.invalid" (click)="onTrackStockClick()">
                 Track Stock 
-                <!-- <mat-icon matSuffix>search</mat-icon>  -->
             </button>
         
             <mat-progress-bar mode="indeterminate"  *ngIf="loading"></mat-progress-bar>

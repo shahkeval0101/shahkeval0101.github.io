@@ -8,9 +8,6 @@
               <ng-container  *ngFor="let item of sentimentList">
                 <div class="col-sm-4">
                   <p>{{item.monthName | uppercase}} </p>
-                        <!-- <p class="card-text col-sm-6"   >Change :{{item.change}}</p> -->
-
-
 
                         <p *ngIf="+(item.change)>0; else downward_arrow" class="card-text col-sm-6" style="color:#4aa00d;">Change :{{item.change}} 
                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16" style="color:#4aa00d" >
