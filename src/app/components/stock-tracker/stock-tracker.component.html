@@ -4,7 +4,12 @@
         <br>
         <mat-form-field appearance="outline" [style.width.px]=400 style="text-align:left;">
             <mat-label>Enter the symbol of a stock to track</mat-label>
-            <input matInput placeholder="Enter Value" type="text" formControlName = "stockSymbol" class = "form-control" name = "stockSymbol">
+            <input matInput 
+                placeholder="Enter Value" 
+                type="text" 
+                formControlName = "stockSymbol" 
+                class = "form-control" 
+                name = "stockSymbol">
             <mat-icon matSuffix>query_stats</mat-icon>
             <mat-hint>Symbol(AAPL,TSLA,GOOG)</mat-hint>
             <mat-error *ngIf="stockAdder.controls.stockSymbol.errors?.LengthValue">Enter Value from 1 to 5 characters</mat-error>
