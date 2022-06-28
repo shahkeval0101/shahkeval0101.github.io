@@ -31,3 +31,5 @@ The application is built with Finnhub Open source API, Angular and Angular Mater
 The application is hosted on github pages https://shahkeval0101.github.io/. <br>
 The source code is present at github https://github.com/shahkeval0101/shahkeval0101.github.io .<br>
 
+For Production 
+ng build to update the docs folder for github pages production

@@ -1,28 +1,8 @@
 <h3><strong> Stock Tracker App </strong></h3>
-<p style="font-family: 'Roboto', sans-serif;color: black;font-size: 15px;margin: 10px;padding: 10px;">This project is developed as a part of the angular certification coding challenge from 
-  <a href="https://www.angulartraining.com/">Angular Training</a> <br>
-This is level 2 challenge to develop the coding application.<br>
-This is a stock tracking application which uses open source api <a href="https://finnhub.io">Finnhub</a> to get  real time stock data of American stock exchange. <br>
-
-The application initially fetches data from local storage which is saved from the last time user has used this application. <br>
-The application allows the user to add the stock to the list to keep its track, it also performs some basic validation on the input field. <br>
-The application uses different API end points to get different details about the stocks. <br>
-User once enters the symbol of the stock he wants to track and clicks on "Track Stock" button, the application calls 2 API  <br>
-
-1)  <a href="https://finnhub.io/docs/api/quote">Finnhub API</a> to fetch stock details like opening pice, high price, percentage change, current price, low price <br>
-2) <a href="https://finnhub.io/docs/api/symbol-search">Finnhub API</a> to fetch company stock details 
-
-
-<br>
-With the following information new stock is added to the tracking list. <br>
-The application also provides ability to add stock and remove the stock from the list whenever needed with the close button present on each tracker. <br>
-The stock tracker has an additional feature to give sentiments of the stock for the past few months for which it uses open source <a href="https://finnhub.io/docs/api/insider-sentiment">Finnhub API</a> to get the sentiments of the stock for previous month. <br>
-By default it calls for the past three months, but depending upon the API response the number months shown can be less. <br> 
-
+This application is developed by keval shah as a part angulartraining certification program for level - 2
 The application is built with Finnhub Open source API, Angular and Angular Material library and Bootstrap. <br>
 The application is hosted on <a href="https://shahkeval0101.github.io/.">github pages</a> . <br>
 The source code is present at <a href="https://github.com/shahkeval0101/shahkeval0101.github.io">github</a> . <br>
-</p>
 <button mat-raised-button [routerLink]="['']" color="primary">
   Back to list of stocks
 </button>    
